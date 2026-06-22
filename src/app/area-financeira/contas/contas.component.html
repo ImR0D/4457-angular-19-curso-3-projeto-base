@@ -1,24 +1,17 @@
-<section class="contas-card">
-  <div class="titulo-wrapper">
-    <h2 class="texto-lg">Minhas contas</h2>
+<app-card title="Minhas contas">
+  <div class="contas-e-botao">
+    <ul>
+      @for (conta of contas(); track conta.nome) {
+        <li class="item-entre-divisorias">
+          <app-conta [conta]="conta" />
+        </li>
+      } @empty {
+        <li aria-hidden="true">Ainda não há contas criadas.</li>
+      }
+    </ul>
+    <app-botao class="botao-adicionar-conta">
+      <img class="icone-carteira" src="icones/carteira.svg" alt="" />
+      Adicionar Conta
+    </app-botao>
   </div>
-
-  <div class="corpo-card">
-    <div class="contas-e-botao">
-      <ul>
-        @for (conta of contas(); track conta.nome) {
-          <li class="item-entre-divisorias">
-            <app-conta [conta]="conta" />
-          </li>
-        } @empty {
-          <li aria-hidden="true">Ainda não há contas criadas.</li>
-        }
-      </ul>
-
-      <app-botao class="botao-adicionar-conta">
-        <img class="icone-carteira" src="icones/carteira.svg" alt="" />
-        Adicionar Conta
-      </app-botao>
-    </div>
-  </div>
-</section>
+</app-card>
