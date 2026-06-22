@@ -11,13 +11,14 @@
             <app-conta [conta]="conta" />
           </li>
         } @empty {
-          <li aria-hidden="true">
-            Ainda não há contas criadas.
-          </li>
+          <li aria-hidden="true">Ainda não há contas criadas.</li>
         }
       </ul>
-  
-      <app-botao class="botao-adicionar-conta" texto="Adicionar conta" />
+
+      <app-botao class="botao-adicionar-conta">
+        <img class="icone-carteira" src="icones/carteira.svg" alt="" />
+        Adicionar Conta
+      </app-botao>
     </div>
   </div>
 </section>
