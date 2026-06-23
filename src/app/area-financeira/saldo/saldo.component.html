@@ -1,5 +1,7 @@
-<app-card title="Saldo disponível">
+<app-card>
+  <h2 card-title class="texto-lg">Saldo disponível:</h2>
   <span
+    card-body
     class="valor texto-xxxl"
     [appDestaqueValorNumerico]="saldo()"
     corPositiva="var(--violeta-destaque)"

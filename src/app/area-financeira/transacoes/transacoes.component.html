@@ -1,5 +1,6 @@
-<app-card title="Movimentação financeira">
-  <div class="transacoes-e-botao">
+<app-card>
+  <h2 card-title class="texto-lg">Movimentação financeira</h2>
+  <div card-body class="transacoes-e-botao">
     <ul>
       @for (transacao of transacoes(); track transacao.id) {
         <li class="item-entre-divisorias">
