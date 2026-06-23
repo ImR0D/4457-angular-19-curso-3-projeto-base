@@ -1,12 +1,15 @@
 <app-card>
-  <img card-title src="icones/saldo.svg" alt="" />
-  <h2 card-title class="texto-lg">Saldo disponível:</h2>
-  <span
-    card-body
-    class="valor texto-xxxl"
-    [appDestaqueValorNumerico]="saldo()"
-    corPositiva="var(--violeta-destaque)"
-  >
-    {{ saldo() | currency: "BRL" }}
-  </span>
+  <ng-container card-title>
+    <img src="icones/saldo.svg" alt="" />
+    <h2 class="texto-lg">Saldo disponível:</h2>
+  </ng-container>
+  <ng-container card-body>
+    <span
+      class="valor texto-xxxl"
+      [appDestaqueValorNumerico]="saldo()"
+      corPositiva="var(--violeta-destaque)"
+    >
+      {{ saldo() | currency: "BRL" }}
+    </span>
+  </ng-container>
 </app-card>

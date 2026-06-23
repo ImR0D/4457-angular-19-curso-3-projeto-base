@@ -1,19 +1,23 @@
 <app-card>
-  <h2 card-title class="texto-lg">Movimentação financeira</h2>
-  <div card-body class="transacoes-e-botao">
-    <ul>
-      @for (transacao of transacoes(); track transacao.id) {
-        <li class="item-entre-divisorias">
-          <app-transacao [transacao]="transacao" />
-        </li>
-      } @empty {
-        <li aria-hidden="true">Ainda não há transações.</li>
-      }
-    </ul>
+  <ng-container card-title>
+    <h2 class="texto-lg">Movimentação financeira</h2>
+  </ng-container>
+  <ng-container card-body>
+    <div class="transacoes-e-botao">
+      <ul>
+        @for (transacao of transacoes(); track transacao.id) {
+          <li class="item-entre-divisorias">
+            <app-transacao [transacao]="transacao" />
+          </li>
+        } @empty {
+          <li aria-hidden="true">Ainda não há transações.</li>
+        }
+      </ul>
 
-    <app-botao class="botao-adicionar-transacao">
-      <img class="icone-moeda" src="icones/moeda.svg" alt="" />
-      Adicionar Transação
-    </app-botao>
-  </div>
+      <app-botao class="botao-adicionar-transacao">
+        <img class="icone-moeda" src="icones/moeda.svg" alt="" />
+        Adicionar Transação
+      </app-botao>
+    </div>
+  </ng-container>
 </app-card>

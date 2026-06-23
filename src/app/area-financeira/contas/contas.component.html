@@ -1,18 +1,22 @@
 <app-card>
-  <h2 card-title class="texto-lg">Minhas contas</h2>
-  <div card-body class="contas-e-botao">
-    <ul>
-      @for (conta of contas(); track conta.nome) {
-        <li class="item-entre-divisorias">
-          <app-conta [conta]="conta" />
-        </li>
-      } @empty {
-        <li aria-hidden="true">Ainda não há contas criadas.</li>
-      }
-    </ul>
-    <app-botao class="botao-adicionar-conta">
-      <img class="icone-carteira" src="icones/carteira.svg" alt="" />
-      Adicionar Conta
-    </app-botao>
-  </div>
+  <ng-container card-title>
+    <h2 class="texto-lg">Minhas contas</h2>
+  </ng-container>
+  <ng-container card-body>
+    <div class="contas-e-botao">
+      <ul>
+        @for (conta of contas(); track conta.nome) {
+          <li class="item-entre-divisorias">
+            <app-conta [conta]="conta" />
+          </li>
+        } @empty {
+          <li aria-hidden="true">Ainda não há contas criadas.</li>
+        }
+      </ul>
+      <app-botao class="botao-adicionar-conta">
+        <img class="icone-carteira" src="icones/carteira.svg" alt="" />
+        Adicionar Conta
+      </app-botao>
+    </div>
+  </ng-container>
 </app-card>
