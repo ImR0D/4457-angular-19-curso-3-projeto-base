@@ -4,6 +4,10 @@
   padding: 1rem;
   font-weight: 700;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .corpo-card {
