@@ -1,0 +1,15 @@
+<dialog class="dialog" #dialogModal>
+  <div class="dialog-header">
+    <button class="close-modal" (click)="onClose()">
+      <img src="icones/fechar.svg" alt="fechar" aria-label="fechar diálogo" />
+    </button>
+    <ng-content select="[header]">
+      <h2>Header</h2>
+    </ng-content>
+  </div>
+  <div class="dialog-body">
+    <ng-content select="[body]">
+      <p>Body</p>
+    </ng-content>
+  </div>
+</dialog>
