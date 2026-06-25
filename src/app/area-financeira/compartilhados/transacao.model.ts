@@ -1,4 +1,5 @@
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
+import { TipoBancos } from './tiposBancos.type';
 
 export class Transacao {
   public readonly id = nanoid();
@@ -8,11 +9,12 @@ export class Transacao {
     public readonly tipo: TipoTransacao,
     public readonly valor: number,
     public readonly data: Date,
-    public readonly conta: string
+    public readonly conta: TipoBancos,
   ) {}
 }
 
 export enum TipoTransacao {
-  DEPOSITO = 'Depósito',
-  SAQUE = 'Saque'
+  Deposit = 'Depósito',
+  Withdraw = 'Saque',
+  Transfer = 'Transferência',
 }

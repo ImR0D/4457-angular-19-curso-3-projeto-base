@@ -1,4 +1,4 @@
-import { afterRender, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { BotaoComponent } from '../../../compartilhados/botao/botao.component';
 import { ModalComponent } from '../../../compartilhados/modal/modal.component';
 import {
@@ -7,9 +7,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BankType } from '../../../types/BankType';
 import { KeyValuePipe, TitleCasePipe } from '@angular/common';
-import { TransactionTypes } from '../../../types/TransactionTypes';
+import { TipoBancos } from '../../compartilhados/tiposBancos.type';
+import { TipoTransacao, Transacao } from '../../compartilhados/transacao.model';
 
 @Component({
   selector: 'app-botao-adicionar-transacao',
@@ -25,8 +25,8 @@ import { TransactionTypes } from '../../../types/TransactionTypes';
 })
 export class BotaoAdicionarTransacaoComponent {
   openModal = signal(false);
-  bankTypes = BankType;
-  transactionTypes = TransactionTypes;
+  bankTypes = TipoBancos;
+  transactionTypes = TipoTransacao;
 
   formTransaction = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -47,9 +47,16 @@ export class BotaoAdicionarTransacaoComponent {
   }
 
   submitForm() {
-    if (this.formTransaction.valid) {
-      const dadosEnviados = { ...this.formTransaction.value };
+    const dados = this.formTransaction.value;
+    const dadosEnviados: Transacao = new Transacao(
+      dados.name as string,
+      dados.type as TipoTransacao,
+      Number(dados.value),
+      new Date(dados.creationDate as string),
+      dados.accountBankType as TipoBancos,
+    );
 
+    if (this.formTransaction.valid) {
       console.log('Dados capturados com sucesso:', dadosEnviados);
 
       this.openModal.set(false);

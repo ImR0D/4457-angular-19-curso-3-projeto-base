@@ -4,6 +4,7 @@ import { TransacoesComponent } from './transacoes/transacoes.component';
 import { ContasComponent } from './contas/contas.component';
 import { Conta } from './compartilhados/conta.model';
 import { Transacao, TipoTransacao } from './compartilhados/transacao.model';
+import { TipoBancos } from './compartilhados/tiposBancos.type';
 
 @Component({
   selector: 'app-area-financeira',
@@ -18,42 +19,42 @@ export class AreaFinanceiraComponent {
     {
       id: '5',
       nome: '',
-      tipo: TipoTransacao.SAQUE,
+      tipo: TipoTransacao.Withdraw,
       valor: 200,
       data: new Date('2025-02-20T00:00'),
-      conta: 'Switch Bank',
+      conta: TipoBancos.SwitchBank,
     },
     {
       id: '4',
       nome: 'Almoço',
-      tipo: TipoTransacao.SAQUE,
+      tipo: TipoTransacao.Withdraw,
       valor: 40,
       data: new Date('2025-01-15T00:00'),
-      conta: 'Bytebank',
+      conta: TipoBancos.Bytebank,
     },
     {
       id: '3',
       nome: '',
-      tipo: TipoTransacao.DEPOSITO,
+      tipo: TipoTransacao.Deposit,
       valor: 400,
       data: new Date('2025-01-10T00:00'),
-      conta: 'Bytebank',
+      conta: TipoBancos.Bytebank,
     },
     {
       id: '2',
       nome: 'Freela (2ª parte)',
-      tipo: TipoTransacao.DEPOSITO,
+      tipo: TipoTransacao.Deposit,
       valor: 200,
       data: new Date('2024-10-01T00:00'),
-      conta: 'Anybank',
+      conta: TipoBancos.Anybank,
     },
     {
       id: '1',
       nome: 'Freela (1ª parte)',
-      tipo: TipoTransacao.DEPOSITO,
+      tipo: TipoTransacao.Deposit,
       valor: 100,
       data: new Date('2024-10-01T00:00'),
-      conta: 'Anybank',
+      conta: TipoBancos.Anybank,
     },
   ];
 

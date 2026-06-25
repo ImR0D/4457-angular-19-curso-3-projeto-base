@@ -13,7 +13,7 @@ export class TransacaoComponent {
   transacao = input.required<Transacao>();
 
   valor = computed(() => {
-    if (this.transacao().tipo === TipoTransacao.SAQUE) {
+    if (this.transacao().tipo === TipoTransacao.Withdraw) {
       return -this.transacao().valor;
     }
 
