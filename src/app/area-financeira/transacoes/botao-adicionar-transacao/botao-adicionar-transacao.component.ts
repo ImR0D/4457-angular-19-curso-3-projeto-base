@@ -37,7 +37,7 @@ export class BotaoAdicionarTransacaoComponent {
       // Formatos de data que são aceitados pelo regexp:
       // Formato americano: 'yyyy/MM/dd'; 'yy-MM-dd'; 'yyyy/MM/dd', 'yy-MM-dd'
       // Formato brasileiro/outros: 'dd/MM/yyyy'; 'dd-MM-yyyy'; 'dd/MM/yy', 'dd-MM-yy'
-      Validators.pattern(/^\d{1,4}[(\/\-)]\d{1,2}[(\/\-)]\d{2,4}$/),
+      Validators.pattern(/^\d{1,4}[(\/\-)]\d{1,2}[(\/\-)]\d{1,4}$/),
     ]),
     accountBankType: new FormControl('', Validators.required),
   });
