@@ -50,6 +50,10 @@ textarea:invalid {
   outline: 2px solid #ff4d4d;
   color: #ff4d4d;
 }
+
+input::-webkit-calendar-picker-indicator {
+  outline: none;
+}
 input:invalid::-webkit-calendar-picker-indicator {
   color: #f00;
   outline: 2px dashed #10f0f0;
