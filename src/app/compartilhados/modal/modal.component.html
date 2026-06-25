@@ -1,4 +1,4 @@
-<dialog class="dialog" #dialogModal>
+<dialog class="dialog" #dialogModal (close)="onClose()">
   <div class="dialog-header">
     <button class="close-modal" (click)="onClose()">
       <img src="icones/fechar.svg" alt="fechar" aria-label="fechar diálogo" />
