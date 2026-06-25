@@ -1,16 +1,16 @@
-@import url('reset.css');
-@import url('tipografia.css');
+@import url("reset.css");
+@import url("tipografia.css");
 
 :root {
-  --fundo-geral: #1C1D21;
-  --fundo-componentes: #2A2C34;
-  --cabecalho-componentes: #33353F;
-  --texto: #F5F5F5;
+  --fundo-geral: #1c1d21;
+  --fundo-componentes: #2a2c34;
+  --cabecalho-componentes: #33353f;
+  --texto: #f5f5f5;
 
-  --violeta-destaque: #7693FF;
+  --violeta-destaque: #7693ff;
 
-  --destaque-receita: #D6FF62;
-  --destaque-despesa: #F87828;
+  --destaque-receita: #d6ff62;
+  --destaque-despesa: #f87828;
 }
 
 html,
@@ -25,10 +25,36 @@ body {
 }
 
 .item-entre-divisorias:not(:last-child)::after {
-  content: '';
+  content: "";
   background: var(--cabecalho-componentes);
   display: block;
   height: 0.0625rem;
   width: 100%;
   margin: 1rem 0;
+}
+
+input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+input[type="date"]:invalid,
+input[type="number"]:invalid,
+input[type="email"]:invalid,
+input[type="search"]:invalid,
+input[type="tel"]:invalid,
+input[type="text"]:invalid,
+input[type="time"]:invalid,
+select:invalid,
+textarea:invalid {
+  outline: 2px solid #ff4d4d;
+  color: #ff4d4d;
+}
+input:invalid::-webkit-calendar-picker-indicator {
+  color: #f00;
+  outline: 2px dashed #10f0f0;
+}
+
+input:invalid::placeholder {
+  color: #ff4d4d;
 }
