@@ -9,29 +9,41 @@
     <h2 class="text-xl">Adicionar transação</h2>
   </ng-container>
   <ng-container body>
-    <form class="form text-md">
+    <form
+      class="form text-md"
+      [formGroup]="formTransaction"
+      (ngSubmit)="submitForm()"
+    >
       <label class="label-grupo">
         Nome da transação
-        <input class="input" type="text" name="nome-transacao" />
+        <input
+          formControlName="name"
+          class="input"
+          type="text"
+          name="nome-transacao"
+        />
       </label>
 
       <fieldset class="grupo-tipo-transacao" required>
         <legend class="legend">Tipo da transação</legend>
 
-        <label class="label-grupo-radio">
-          <input type="radio" name="tipo-transacao" required />
-          Saque
-        </label>
-
-        <label class="label-grupo-radio">
-          <input type="radio" name="tipo-transacao" required />
-          Depósito
-        </label>
+        @for (ttype of transactionTypes | keyvalue; track ttype.key) {
+          <label class="label-grupo-radio">
+            <input
+              formControlName="type"
+              type="radio"
+              [value]="ttype.value"
+              required
+            />
+            <span>{{ ttype.value | titlecase }}</span>
+          </label>
+        }
       </fieldset>
 
       <label class="label-grupo">
         Valor
         <input
+          formControlName="value"
           class="input"
           type="number"
           name="valor-transacao"
@@ -44,21 +56,27 @@
 
       <label class="label-grupo">
         Data da transação
-        <input class="input" type="date" name="data-transacao" required />
+        <input
+          formControlName="creationDate"
+          class="input"
+          type="date"
+          name="data-transacao"
+          required
+        />
       </label>
 
       <label class="label-grupo">
         Conta Bancária
-
         <select
+          formControlName="accountBankType"
           name="conta-transacao"
           class="input select-conta-transacao"
           required
         >
           <option value="" selected disabled>Selecione a conta</option>
-
-          <option value="Anybank">Anybank</option>
-          <option value="Bytebank">Bytebank</option>
+          @for (bank of bankTypes | keyvalue; track bank.key) {
+            <option [value]="bank.value">{{ bank.value | titlecase }}</option>
+          }
         </select>
       </label>
 
