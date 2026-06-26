@@ -3,14 +3,20 @@ import { TipoBancos } from './tiposBancos.type';
 
 export class Transacao {
   public readonly id = nanoid();
+  public readonly data: Date | undefined;
 
   constructor(
     public readonly nome: string,
     public readonly tipo: TipoTransacao,
     public readonly valor: number,
-    public readonly data: Date,
+    data: string,
     public readonly conta: TipoBancos,
-  ) {}
+  ) {
+    if (!data.includes('T:') || !data.includes(' ')) {
+      data += 'T00:00';
+    }
+    this.data = new Date(data);
+  }
 }
 
 export enum TipoTransacao {

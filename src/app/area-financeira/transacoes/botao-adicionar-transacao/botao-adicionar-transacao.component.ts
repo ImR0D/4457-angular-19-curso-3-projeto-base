@@ -52,7 +52,7 @@ export class BotaoAdicionarTransacaoComponent {
       dados.name as string,
       dados.type as TipoTransacao,
       Number(dados.value),
-      new Date(dados.creationDate as string),
+      dados.creationDate as string,
       dados.accountBankType as TipoBancos,
     );
 
