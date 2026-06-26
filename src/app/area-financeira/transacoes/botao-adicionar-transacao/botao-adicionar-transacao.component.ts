@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { BotaoComponent } from '../../../compartilhados/botao/botao.component';
 import { ModalComponent } from '../../../compartilhados/modal/modal.component';
 import {
@@ -42,13 +42,15 @@ export class BotaoAdicionarTransacaoComponent {
     accountBankType: new FormControl('', Validators.required),
   });
 
+  transacaoCriada = output<Transacao>();
+
   openModalDialog() {
     this.openModal.set(true);
   }
 
   submitForm() {
     const dados = this.formTransaction.value;
-    const dadosEnviados: Transacao = new Transacao(
+    const transaction: Transacao = new Transacao(
       dados.name as string,
       dados.type as TipoTransacao,
       Number(dados.value),
@@ -56,17 +58,19 @@ export class BotaoAdicionarTransacaoComponent {
       dados.accountBankType as TipoBancos,
     );
 
-    if (this.formTransaction.valid) {
-      console.log('Dados capturados com sucesso:', dadosEnviados);
-
-      this.openModal.set(false);
-      this.formTransaction.reset({
-        name: '',
-        type: '',
-        value: '',
-        creationDate: '',
-        accountBankType: '',
-      });
+    if (!this.formTransaction.valid) {
+      throw new Error('Transação inválida ');
     }
+
+    this.transacaoCriada.emit(transaction);
+
+    this.openModal.set(false);
+    this.formTransaction.reset({
+      name: '',
+      type: '',
+      value: '',
+      creationDate: '',
+      accountBankType: '',
+    });
   }
 }

@@ -13,7 +13,7 @@
           <li aria-hidden="true">Ainda não há transações.</li>
         }
       </ul>
-      <app-botao-adicionar-transacao class="botao-adicionar-transacao" />
+      <app-botao-adicionar-transacao class="botao-adicionar-transacao" (transacaoCriada)="transacaoCriada.emit($event)" />
     </div>
   </ng-container>
 </app-card>

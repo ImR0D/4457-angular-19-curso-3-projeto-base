@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { SaldoComponent } from './saldo/saldo.component';
 import { TransacoesComponent } from './transacoes/transacoes.component';
 import { ContasComponent } from './contas/contas.component';
@@ -15,7 +15,7 @@ import { TipoBancos } from './compartilhados/tiposBancos.type';
 export class AreaFinanceiraComponent {
   saldo = 0;
 
-  transacoes: Transacao[] = [
+  transacoes = signal<Transacao[]>([
     {
       id: '5',
       nome: '',
@@ -56,7 +56,7 @@ export class AreaFinanceiraComponent {
       data: new Date('2024-10-01T00:00'),
       conta: TipoBancos.Anybank,
     },
-  ];
+  ]);
 
   contas: Conta[] = [
     {
@@ -72,4 +72,8 @@ export class AreaFinanceiraComponent {
       saldo: 0,
     },
   ];
+
+  processarTransacao(transaction: Transacao) {
+    this.transacoes.update((transacoes) => [transaction, ...transacoes]);
+  }
 }
