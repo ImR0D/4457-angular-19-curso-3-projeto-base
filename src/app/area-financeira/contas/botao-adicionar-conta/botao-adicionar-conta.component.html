@@ -1,0 +1,9 @@
+<app-botao (click)="openModalDialog()">
+  <img class="icone-carteira" src="icones/carteira.svg" alt="" />
+  Adicionar Conta
+</app-botao>
+
+<app-modal [(open)]="openModal">
+  <ng-container header> Título </ng-container>
+  <ng-container body> Corpo </ng-container>
+</app-modal>
