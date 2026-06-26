@@ -22,7 +22,7 @@ export class AreaFinanceiraComponent {
       tipo: TipoTransacao.Withdraw,
       valor: 200,
       data: new Date('2025-02-20T00:00'),
-      conta: TipoBancos.SwitchBank,
+      conta: 'SwitchBank',
     },
     {
       id: '4',
@@ -30,7 +30,7 @@ export class AreaFinanceiraComponent {
       tipo: TipoTransacao.Withdraw,
       valor: 40,
       data: new Date('2025-01-15T00:00'),
-      conta: TipoBancos.Bytebank,
+      conta: 'Bytebank',
     },
     {
       id: '3',
@@ -38,7 +38,7 @@ export class AreaFinanceiraComponent {
       tipo: TipoTransacao.Deposit,
       valor: 400,
       data: new Date('2025-01-10T00:00'),
-      conta: TipoBancos.Bytebank,
+      conta: 'Bytebank',
     },
     {
       id: '2',
@@ -46,7 +46,7 @@ export class AreaFinanceiraComponent {
       tipo: TipoTransacao.Deposit,
       valor: 200,
       data: new Date('2024-10-01T00:00'),
-      conta: TipoBancos.Anybank,
+      conta: 'Anybank',
     },
     {
       id: '1',
@@ -54,11 +54,11 @@ export class AreaFinanceiraComponent {
       tipo: TipoTransacao.Deposit,
       valor: 100,
       data: new Date('2024-10-01T00:00'),
-      conta: TipoBancos.Anybank,
+      conta: 'Anybank',
     },
   ]);
 
-  contas: Conta[] = [
+  contas = signal<Conta[]>([
     {
       nome: 'Anybank',
       saldo: 1000,
@@ -71,9 +71,12 @@ export class AreaFinanceiraComponent {
       nome: 'Switch Bank',
       saldo: 0,
     },
-  ];
+  ]);
 
   processarTransacao(transaction: Transacao) {
     this.transacoes.update((transacoes) => [transaction, ...transacoes]);
+  }
+  adicionarConta(conta: Conta) {
+    this.contas.update((contas) => [conta, ...contas]);
   }
 }

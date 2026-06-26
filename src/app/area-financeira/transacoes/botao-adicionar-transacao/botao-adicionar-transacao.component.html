@@ -74,7 +74,7 @@
           required
         >
           <option value="" selected disabled>Selecione a conta</option>
-          @for (bank of bankTypes | keyvalue; track bank.key) {
+          @for (bank of bankTypes() | keyvalue; track bank.key) {
             <option [value]="bank.value">{{ bank.value | titlecase }}</option>
           }
         </select>

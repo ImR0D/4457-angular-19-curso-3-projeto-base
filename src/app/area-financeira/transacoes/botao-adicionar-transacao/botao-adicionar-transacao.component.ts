@@ -55,7 +55,7 @@ export class BotaoAdicionarTransacaoComponent {
       dados.type as TipoTransacao,
       Number(dados.value),
       dados.creationDate as string,
-      dados.accountBankType as TipoBancos,
+      dados.accountBankType as string,
     );
 
     if (!this.formTransaction.valid) {

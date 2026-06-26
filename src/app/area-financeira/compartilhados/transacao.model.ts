@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import { TipoBancos } from './tiposBancos.type';
 
 export class Transacao {
   public readonly id = nanoid();
@@ -10,7 +9,7 @@ export class Transacao {
     public readonly tipo: TipoTransacao,
     public readonly valor: number,
     data: string,
-    public readonly conta: TipoBancos,
+    public readonly conta: string,
   ) {
     if (!data.includes('T:') || !data.includes(' ')) {
       data += 'T00:00';
