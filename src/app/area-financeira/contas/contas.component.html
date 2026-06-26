@@ -13,7 +13,10 @@
           <li aria-hidden="true">Ainda não há contas criadas.</li>
         }
       </ul>
-      <app-botao-adicionar-conta class="botao-adicionar-conta" />
+      <app-botao-adicionar-conta
+        class="botao-adicionar-conta"
+        (accountBank)="accountBank.emit($event)"
+      />
     </div>
   </ng-container>
 </app-card>

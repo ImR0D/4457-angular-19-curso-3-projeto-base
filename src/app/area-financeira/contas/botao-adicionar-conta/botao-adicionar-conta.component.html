@@ -4,6 +4,38 @@
 </app-botao>
 
 <app-modal [(open)]="openModal">
-  <ng-container header> Título </ng-container>
-  <ng-container body> Corpo </ng-container>
+  <ng-container header>
+    <img src="icones/carteira.svg" alt="" />
+    <h2 class="text-xl">Adicionar conta bancária</h2>
+  </ng-container>
+  <ng-container body>
+    <form class="form text-md" (ngSubmit)="submitAccount()">
+      <label class="label-grupo">
+        Banco
+        <input
+          name="nome-transacao"
+          class="input"
+          type="text"
+          required
+          [(ngModel)]="objetoCriarConta.nome"
+        />
+      </label>
+
+      <label class="label-grupo">
+        Saldo
+        <input
+          name="valor-transacao"
+          class="input"
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="R$ 500,00"
+          required
+          [(ngModel)]="objetoCriarConta.saldo"
+        />
+      </label>
+
+      <app-botao class="botao-adicionar-transacao"> Adicionar </app-botao>
+    </form>
+  </ng-container>
 </app-modal>
