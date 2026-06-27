@@ -9,7 +9,7 @@
     <h2 class="text-xl">Adicionar conta bancária</h2>
   </ng-container>
   <ng-container body>
-    <form class="form text-md" (ngSubmit)="submitAccount()">
+    <form class="form text-md" (ngSubmit)="submitAccount()" ngNativeValidate>
       <label class="label-grupo">
         Banco
         <input

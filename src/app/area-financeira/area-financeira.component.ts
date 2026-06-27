@@ -1,10 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { SaldoComponent } from './saldo/saldo.component';
 import { TransacoesComponent } from './transacoes/transacoes.component';
 import { ContasComponent } from './contas/contas.component';
 import { Conta } from './compartilhados/conta.model';
 import { Transacao, TipoTransacao } from './compartilhados/transacao.model';
-import { TipoBancos } from './compartilhados/tiposBancos.type';
 
 @Component({
   selector: 'app-area-financeira',
@@ -15,68 +14,48 @@ import { TipoBancos } from './compartilhados/tiposBancos.type';
 export class AreaFinanceiraComponent {
   saldo = 0;
 
-  transacoes = signal<Transacao[]>([
-    {
-      id: '5',
-      nome: '',
-      tipo: TipoTransacao.Withdraw,
-      valor: 200,
-      data: new Date('2025-02-20T00:00'),
-      conta: 'SwitchBank',
-    },
-    {
-      id: '4',
-      nome: 'Almoço',
-      tipo: TipoTransacao.Withdraw,
-      valor: 40,
-      data: new Date('2025-01-15T00:00'),
-      conta: 'Bytebank',
-    },
-    {
-      id: '3',
-      nome: '',
-      tipo: TipoTransacao.Deposit,
-      valor: 400,
-      data: new Date('2025-01-10T00:00'),
-      conta: 'Bytebank',
-    },
-    {
-      id: '2',
-      nome: 'Freela (2ª parte)',
-      tipo: TipoTransacao.Deposit,
-      valor: 200,
-      data: new Date('2024-10-01T00:00'),
-      conta: 'Anybank',
-    },
-    {
-      id: '1',
-      nome: 'Freela (1ª parte)',
-      tipo: TipoTransacao.Deposit,
-      valor: 100,
-      data: new Date('2024-10-01T00:00'),
-      conta: 'Anybank',
-    },
-  ]);
+  transacoes = signal<Transacao[]>([]);
+  contasComSaldoInicial = signal<Conta[]>([]);
 
-  contas = signal<Conta[]>([
-    {
-      nome: 'Anybank',
-      saldo: 1000,
-    },
-    {
-      nome: 'Bytebank',
-      saldo: 0,
-    },
-    {
-      nome: 'Switch Bank',
-      saldo: 0,
-    },
-  ]);
+  contas = computed(() => {
+    return this.contasComSaldoInicial().map((conta) => {
+      const atualizaSaldo = this.calculaSaldoAtualizado(conta);
+      return { ...conta, saldo: atualizaSaldo };
+    });
+  });
 
   processarTransacao(transaction: Transacao) {
+    if (
+      transaction.valor > Number(this.contas) &&
+      transaction.tipo != TipoTransacao.Deposit
+    ) {
+      throw new Error('Saldo insuficiente para realizar a transação');
+    }
     this.transacoes.update((transacoes) => [transaction, ...transacoes]);
   }
   adicionarConta(conta: Conta) {
-    this.contas.update((contas) => [conta, ...contas]);
+    this.contasComSaldoInicial.update((contas) => [conta, ...contas]);
+  }
+  calculaSaldoAtualizado(contaInicial: Conta) {
+    const transacoesDaConta = this.transacoes().filter((transacao) => {
+      return transacao.conta === contaInicial.nome;
+    });
+    const saldoAtualizado = transacoesDaConta.reduce(
+      (acumulador, transacao) => {
+        switch (transacao.tipo) {
+          case TipoTransacao.Deposit:
+            return acumulador + transacao.valor;
+          case TipoTransacao.Transfer:
+          case TipoTransacao.Withdraw:
+            return acumulador - transacao.valor;
+          default:
+            transacao.tipo satisfies never;
+            throw new Error('Tipo de transação não identificado.');
+        }
+      },
+      contaInicial.saldo,
+    );
+
+    return saldoAtualizado;
   }
 }
